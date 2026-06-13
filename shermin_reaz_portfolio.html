@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shermin Reaz – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#060D1F;--violet:#7C3AED;--cyan:#00D4FF;--violet-dim:#4C1D95;
+  --glass:rgba(124,58,237,0.10);--glass2:rgba(0,212,255,0.08);
+  --text:#F0F4FF;--muted:#94A3CB;--card:rgba(15,24,50,0.85);
+  --border:rgba(124,58,237,0.25);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;backdrop-filter:blur(16px);background:rgba(6,13,31,0.75);border-bottom:1px solid var(--border);}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.04em;background:linear-gradient(135deg,var(--violet),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;transition:.2s;}
+.nav-links a:hover{color:var(--text);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:0 3rem;}
+canvas#neural{position:absolute;inset:0;z-index:0;}
+.hero-content{position:relative;z-index:2;max-width:680px;}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;}
+.eyebrow::before{content:'';width:2rem;height:1px;background:var(--cyan);}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:700;line-height:1.1;margin-bottom:1.2rem;}
+h1 span.grad{background:linear-gradient(135deg,var(--violet) 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tagline{font-size:1rem;color:var(--muted);line-height:1.7;max-width:520px;margin-bottom:2rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{padding:.75rem 1.8rem;border-radius:999px;background:var(--violet);color:#fff;text-decoration:none;font-size:.9rem;font-weight:500;border:none;cursor:pointer;transition:.2s;display:inline-block;}
+.btn-primary:hover{background:#6D28D9;transform:translateY(-2px);}
+.btn-outline{padding:.75rem 1.8rem;border-radius:999px;border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:.9rem;transition:.2s;display:inline-block;}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.4rem;color:var(--muted);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;}
+.scroll-dot{width:6px;height:6px;border-radius:50%;background:var(--violet);animation:bounce 1.6s infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* SECTIONS */
+section{padding:5rem 3rem;}
+.section-label{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:.5rem;}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-bottom:3rem;}
+
+/* SKILLS */
+#skills{background:rgba(10,17,35,0.6);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;backdrop-filter:blur(12px);transition:.25s;}
+.skill-card:hover{border-color:rgba(124,58,237,0.6);transform:translateY(-3px);}
+.skill-cat{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:.6rem;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.tag{font-size:.75rem;padding:.25rem .65rem;border-radius:999px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:#C4B5FD;}
+
+/* EXPERIENCE & EDUCATION */
+#experience{background:var(--navy);}
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{content:'';position:absolute;left:0;top:.4rem;bottom:0;width:1px;background:linear-gradient(to bottom,var(--violet),transparent);}
+.tl-item{position:relative;margin-bottom:2.5rem;}
+.tl-dot{position:absolute;left:-2.35rem;top:.3rem;width:14px;height:14px;border-radius:50%;background:var(--violet);box-shadow:0 0 12px var(--violet);}
+.tl-date{font-size:.75rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.3rem;}
+.tl-title{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:.15rem;}
+.tl-org{font-size:.85rem;color:var(--cyan);margin-bottom:.6rem;}
+.tl-desc{font-size:.88rem;color:var(--muted);line-height:1.65;}
+.tl-desc li{margin-bottom:.3rem;list-style:none;padding-left:1rem;position:relative;}
+.tl-desc li::before{content:'→';position:absolute;left:0;color:var(--violet);}
+
+/* PROJECTS */
+#projects{background:rgba(10,17,35,0.6);}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.8rem;backdrop-filter:blur(12px);position:relative;overflow:hidden;transition:.3s;}
+.proj-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 0%,rgba(124,58,237,0.1) 0%,transparent 60%);pointer-events:none;}
+.proj-card:hover{border-color:rgba(0,212,255,0.4);transform:translateY(-4px);}
+.proj-icon{width:44px;height:44px;border-radius:12px;background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.35);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.3rem;}
+.proj-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;margin-bottom:.5rem;}
+.proj-desc{font-size:.84rem;color:var(--muted);line-height:1.65;margin-bottom:1rem;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+.ptag{font-size:.7rem;padding:.2rem .55rem;border-radius:999px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.25);color:var(--cyan);}
+
+/* ACHIEVEMENTS */
+#achievements{background:var(--navy);}
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.ach-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem;display:flex;align-items:flex-start;gap:.8rem;backdrop-filter:blur(10px);transition:.2s;}
+.ach-card:hover{border-color:rgba(124,58,237,0.5);}
+.ach-icon{font-size:1.3rem;flex-shrink:0;}
+.ach-text{font-size:.85rem;color:var(--muted);line-height:1.5;}
+.ach-text strong{color:var(--text);font-weight:500;}
+
+/* CONTACT */
+#contact{background:rgba(10,17,35,0.6);text-align:center;}
+.contact-box{max-width:540px;margin:0 auto;}
+.contact-links{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-top:2rem;}
+.contact-link{display:flex;align-items:center;gap:.5rem;padding:.65rem 1.4rem;border:1px solid var(--border);border-radius:999px;color:var(--text);text-decoration:none;font-size:.85rem;transition:.2s;}
+.contact-link:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* FOOTER */
+footer{padding:1.5rem 3rem;border-top:1px solid var(--border);text-align:center;font-size:.78rem;color:var(--muted);}
+
+@media(max-width:600px){nav{padding:1rem 1.2rem;}section{padding:3.5rem 1.2rem;}#hero{padding:0 1.2rem;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">SR.</div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <canvas id="neural"></canvas>
+  <div class="hero-content">
+    <div class="eyebrow">Available for opportunities</div>
+    <h1>Shermin<br/><span class="grad">Reaz</span></h1>
+    <p class="tagline">AI & ML undergraduate building intelligent systems — from neural language models and generative AI to full-stack platforms that solve real-world problems.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-dot"></div>scroll</div>
+</section>
+
+<section id="skills">
+  <div class="section-label">What I work with</div>
+  <div class="section-title">Skills & Technologies</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">AI / ML</div>
+      <div class="skill-tags">
+        <span class="tag">Machine Learning</span><span class="tag">Deep Learning</span>
+        <span class="tag">NLP</span><span class="tag">Transformers</span>
+        <span class="tag">Generative AI</span><span class="tag">Embeddings</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Programming</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">Java</span>
+        <span class="tag">C++</span><span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Frameworks & APIs</div>
+      <div class="skill-tags">
+        <span class="tag">NumPy</span><span class="tag">Pandas</span>
+        <span class="tag">Scikit-learn</span><span class="tag">React.js</span>
+        <span class="tag">Node.js</span><span class="tag">Gemini API</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Databases & Tools</div>
+      <div class="skill-tags">
+        <span class="tag">MySQL</span><span class="tag">MongoDB</span>
+        <span class="tag">Firebase</span><span class="tag">Git</span>
+        <span class="tag">REST APIs</span><span class="tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Mathematics</div>
+      <div class="skill-tags">
+        <span class="tag">Linear Algebra</span><span class="tag">Probability</span>
+        <span class="tag">Statistics</span><span class="tag">Calculus</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Core CS</div>
+      <div class="skill-tags">
+        <span class="tag">DSA</span><span class="tag">OOP</span>
+        <span class="tag">DBMS</span><span class="tag">Operating Systems</span>
+        <span class="tag">Computer Networks</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label">Timeline</div>
+  <div class="section-title">Experience & Education</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:4rem;">
+    <div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;">Experience</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Jun 2026 – Present · Guwahati, Assam</div>
+          <div class="tl-title">Software & Data Operations Intern</div>
+          <div class="tl-org">Oil India Ltd.</div>
+          <ul class="tl-desc">
+            <li>Developed and maintained digital workflows to improve operational efficiency</li>
+            <li>Performed data validation, tracking, and process monitoring across departments</li>
+            <li>Collaborated with teams to identify workflow bottlenecks and improve processes</li>
+            <li>Built software solutions reducing manual effort and improving data accessibility</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;">Education</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Aug 2024 – Present</div>
+          <div class="tl-title">B.Tech CSE – AI & ML Specialization</div>
+          <div class="tl-org">Bennett University · CGPA 8.0</div>
+          <ul class="tl-desc">
+            <li>Deep focus on ML, Deep Learning, and Natural Language Processing</li>
+            <li>Courses: Linear Algebra, Probability & Stats, DSA, DBMS, OS, Networks</li>
+            <li>Hands-on projects involving Transformers, Embeddings & Intelligent Automation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">What I've built</div>
+  <div class="section-title">Projects</div>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-icon">🧠</div>
+      <div class="proj-title">MindTrace</div>
+      <div class="proj-desc">AI-powered mental fatigue detection system that monitors behavioral patterns and activity to encourage healthy work-break cycles and boost productivity.</div>
+      <div class="proj-tags">
+        <span class="ptag">AI</span><span class="ptag">Behavioral Analytics</span>
+        <span class="ptag">Real-time Monitoring</span>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">📚</div>
+      <div class="proj-title">Scholar AI</div>
+      <div class="proj-desc">Intelligent study assistant using NLP, Transformers, and Gemini API. Automates summarization, quiz generation, flowchart creation, and personalized content from study materials.</div>
+      <div class="proj-tags">
+        <span class="ptag">NLP</span><span class="ptag">Transformers</span>
+        <span class="ptag">Gemini API</span><span class="ptag">Embeddings</span>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">🚌</div>
+      <div class="proj-title">EasyBus</div>
+      <div class="proj-desc">Full-stack AI-driven real-time bus tracking platform with GPS integration, route visualization, and automated notifications. Built for Smart India Hackathon 2026.</div>
+      <div class="proj-tags">
+        <span class="ptag">React.js</span><span class="ptag">Node.js</span>
+        <span class="ptag">Firebase</span><span class="ptag">GPS</span>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">🩺</div>
+      <div class="proj-title">Diagnosify</div>
+      <div class="proj-desc">Java-based healthcare application generating diagnosis suggestions through symptom-driven rule-based logic, with an interactive Swing GUI for real-time feedback.</div>
+      <div class="proj-tags">
+        <span class="ptag">Java</span><span class="ptag">Swing GUI</span>
+        <span class="ptag">Rule-based AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="section-label">Recognition</div>
+  <div class="section-title">Achievements & Certifications</div>
+  <div class="ach-grid">
+    <div class="ach-card"><div class="ach-icon">⚡</div><div class="ach-text"><strong>200+ DSA Problems</strong><br/>Solved on LeetCode</div></div>
+    <div class="ach-card"><div class="ach-icon">🏆</div><div class="ach-text"><strong>Smart India Hackathon</strong><br/>Participant – SIH 2025 & 2026</div></div>
+    <div class="ach-card"><div class="ach-icon">☁️</div><div class="ach-text"><strong>Amazon</strong><br/>Certified Junior Software Developer</div></div>
+    <div class="ach-card"><div class="ach-icon">🔷</div><div class="ach-text"><strong>Infosys</strong><br/>Data Structures & Algorithms</div></div>
+    <div class="ach-card"><div class="ach-icon">🤖</div><div class="ach-text"><strong>IBM</strong><br/>Introduction to Artificial Intelligence</div></div>
+    <div class="ach-card"><div class="ach-icon">💼</div><div class="ach-text"><strong>Deloitte Australia</strong><br/>Technology Job Simulation</div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-box">
+    <div class="section-label" style="text-align:center;">Let's connect</div>
+    <div class="section-title" style="margin-bottom:1rem;">Get in Touch</div>
+    <p style="color:var(--muted);font-size:.95rem;line-height:1.7;">Currently open to internships, research collaborations, and exciting AI/ML projects. I'd love to hear from you.</p>
+    <div class="contact-links">
+      <a href="mailto:sherminreaz4@gmail.com" class="contact-link">✉ sherminreaz4@gmail.com</a>
+      <a href="https://github.com/shermin2309" class="contact-link" target="_blank">⌥ GitHub</a>
+      <a href="https://www.linkedin.com/in/shermin-reaz-28386a328" class="contact-link" target="_blank">in LinkedIn</a>
+      <a href="tel:9954975718" class="contact-link">📞 9954975718</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & built for Shermin Reaz · AI & ML Undergraduate · 2026</p>
+</footer>
+
+<script>
+(function(){
+  const canvas=document.getElementById('neural');
+  const ctx=canvas.getContext('2d');
+  let nodes=[],W,H,anim;
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',()=>{resize();initNodes();});
+  function initNodes(){
+    nodes=[];
+    const count=Math.floor(W*H/14000);
+    for(let i=0;i<count;i++){
+      nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+1});
+    }
+  }
+  initNodes();
+  let mx=W/2,my=H/2;
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    nodes.forEach(n=>{
+      n.x+=n.vx;n.y+=n.vy;
+      if(n.x<0||n.x>W)n.vx*=-1;
+      if(n.y<0||n.y>H)n.vy*=-1;
+    });
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<140){
+          const alpha=(1-dist/140)*0.35;
+          const grad=ctx.createLinearGradient(nodes[i].x,nodes[i].y,nodes[j].x,nodes[j].y);
+          grad.addColorStop(0,`rgba(124,58,237,${alpha})`);
+          grad.addColorStop(1,`rgba(0,212,255,${alpha})`);
+          ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);
+          ctx.strokeStyle=grad;ctx.lineWidth=.6;ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n=>{
+      const dmx=n.x-mx,dmy=n.y-my;
+      const dMouse=Math.sqrt(dmx*dmx+dmy*dmy);
+      const glow=dMouse<120?1-(dMouse/120):0;
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r+(glow*2),0,Math.PI*2);
+      ctx.fillStyle=`rgba(${glow>.3?'0,212,255':'124,58,237'},${.55+glow*.45})`;
+      ctx.fill();
+    });
+    anim=requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
